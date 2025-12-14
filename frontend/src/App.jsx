@@ -62,13 +62,15 @@ function App() {
   useEffect(() => {
     prism.highlightAll();
   }, []);
+ const API_URL = import.meta.env.VITE_API_URL;
 
-  async function fetchReview() {
-    const response = await axios.post("https://cod-easy.onrender.com/ai/get-review/", {
-      code,
-    });
-    setReview(response.data);
-  }
+async function fetchReview() {
+  const response = await axios.post(
+    `${API_URL}/ai/get-review`,
+    { code }
+  );
+  setReview(response.data);
+}
 
   function handleFileUpload(event) {
     const file = event.target.files[0];
